@@ -1,7 +1,28 @@
 import random
 import hangmanstages
 
-word_list = ["mercury", "baboon", "camel", "science", "picture"]
+word_list = [
+    "emblem",
+    "courage",
+    "prince",
+    "sword",
+    "clean",
+    "column",
+    "lovely",
+    "picture",
+    "branch",
+    "noise",
+    "great",
+    "mingle",
+    "river",
+    "trick",
+    "window",
+    "zebra",
+    "drench",
+    "father",
+    "happy",
+    "lemon",
+]
 chosen_word = random.choice(word_list)
 #print(chosen_word)
 stage = hangmanstages.stage
@@ -10,6 +31,7 @@ guess_word = []
 for letter in chosen_word:
   guess_word += "_"
 print(guess_word)
+guessed_letters = []
 
 game_over = False
 life_counter = 6  #Go for a max of 6 lives. so until this var = 6
@@ -18,11 +40,14 @@ life_counter = 6  #Go for a max of 6 lives. so until this var = 6
 while (game_over is False):
   guess_variable = input("Enter your guess letter\n")
 
-  if (guess_variable in guess_word):
-    print(
-        "Letter you have entered is already guessed. Retry with a new letter\n"
-    )
-  elif (chosen_word.find(guess_variable) == -1):
+  if (guess_variable not in guessed_letters):
+    guessed_letters.append(guess_variable)
+  else:
+    print("You have already guessed this letter")
+
+  print(f"Letters guessed so far: {guessed_letters}\n")
+
+  if (chosen_word.find(guess_variable) == -1):
     print("Your letter is not there in the word\n")
     print(stage[life_counter])
     life_counter -= 1
